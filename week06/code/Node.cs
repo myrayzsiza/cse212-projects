@@ -1,3 +1,5 @@
+using System;
+
 public class Node
 {
     public int Data { get; set; }
@@ -11,7 +13,11 @@ public class Node
 
     public void Insert(int value)
     {
-        // TODO Start Problem 1
+        // Problem 1: Ignore duplicate values (only insert unique values)
+        if (value == Data)
+        {
+            return;
+        }
 
         if (value < Data)
         {
@@ -33,13 +39,30 @@ public class Node
 
     public bool Contains(int value)
     {
-        // TODO Start Problem 2
-        return false;
+        // Problem 2: Check if current node holds the value
+        if (value == Data)
+        {
+            return true;
+        }
+
+        if (value < Data)
+        {
+            // Search left subtree
+            return Left != null && Left.Contains(value);
+        }
+        else
+        {
+            // Search right subtree
+            return Right != null && Right.Contains(value);
+        }
     }
 
     public int GetHeight()
     {
-        // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        // Problem 4: Calculate height recursively
+        int leftHeight = Left?.GetHeight() ?? 0;
+        int rightHeight = Right?.GetHeight() ?? 0;
+
+        return 1 + Math.Max(leftHeight, rightHeight);
     }
 }

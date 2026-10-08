@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BinarySearchTree : IEnumerable<int>
 {
@@ -68,7 +70,7 @@ public class BinarySearchTree : IEnumerable<int>
     /// <summary>
     /// Iterate backward through the BST.
     /// </summary>
-    public IEnumerable Reverse()
+    public IEnumerable<int> Reverse()
     {
         var numbers = new List<int>();
         TraverseBackward(_root, numbers);
@@ -78,9 +80,17 @@ public class BinarySearchTree : IEnumerable<int>
         }
     }
 
+    /// <summary>
+    /// Problem 3: Traverse the tree in reverse order (Right -> Node -> Left).
+    /// </summary>
     private void TraverseBackward(Node? node, List<int> values)
     {
-        // TODO Problem 3
+        if (node is not null)
+        {
+            TraverseBackward(node.Right, values);
+            values.Add(node.Data);
+            TraverseBackward(node.Left, values);
+        }
     }
 
     /// <summary>
